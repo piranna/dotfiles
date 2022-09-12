@@ -6,7 +6,7 @@
 
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
-#umask 022
+umask 022
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -25,3 +25,10 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+. "$HOME/.cargo/env"
+
+export LANGUAGE="es:en"
+export LC_MESSAGES="es_ES.UTF-8"
+export LC_CTYPE="es_ES.UTF-8"
+export LC_COLLATE="es_ES.UTF-8"
