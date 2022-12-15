@@ -21,11 +21,11 @@ GIT_PULL="git pull origin $BRANCH --allow-unrelated-histories"
 cd $HOME
 
 # Check if $HOME has already defined dotfiles, or could overwrite something
-[ -d ".git"        ] && { >&2 echo "Already is a git project"      ; exit 1; }
-[ -d ".gitignore"  ] && { >&2 echo "Already has a .gitignore file" ; exit 2; }
-[ -d "dotfiles.sh" ] && { >&2 echo "Already has a dotfiles.sh file"; exit 3; }
-[ -d "LICENSE"     ] && { >&2 echo "Already has a LICENSE file"    ; exit 4; }
-[ -d "README.md"   ] && { >&2 echo "Already has a README.md file"  ; exit 5; }
+[ -e ".git"        ] && { >&2 echo "Already is a git repository"   ; exit 1; }
+[ -e ".gitignore"  ] && { >&2 echo "Already has a .gitignore file" ; exit 2; }
+[ -e "dotfiles.sh" ] && { >&2 echo "Already has a dotfiles.sh file"; exit 3; }
+[ -e "LICENSE"     ] && { >&2 echo "Already has a LICENSE file"    ; exit 4; }
+[ -e "README.md"   ] && { >&2 echo "Already has a README.md file"  ; exit 5; }
 
 # Create local repository
 git init --initial-branch=$BRANCH
