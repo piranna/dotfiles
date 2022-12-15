@@ -40,7 +40,7 @@ files=`echo "$stderr" | grep '^	'`
 
 # Commit conflicting local files
 git add $files
-cat /etc/hostname | git commit -F -
+echo Initial commit: `cat /etc/hostname` | git commit -F -
 
 # Merge the dotfiles repository
 while ! $GIT_PULL --no-rebase
