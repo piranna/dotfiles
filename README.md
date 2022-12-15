@@ -10,7 +10,7 @@ shell script to easily install and keep them updated on multiple machines. It al
 config files, **NEVER** add them to files uploaded to a git repository,
 specially if it will be a public one.
 
-## How to use
+## How to install
 
 1. Fork this repo
 2. Update `URL` variable [dotfiles.sh](./dotfiles.sh) file to point to the
@@ -29,6 +29,16 @@ specially if it will be a public one.
 
 6. Fix any git conflict that's shown on the command line output on another
    terminal until there's no more conflict errors.
+
+## How to update
+
+Being powered by `git`, you can make use of all usual git workflows:
+
+- If config files in remote repository has been updated, just do `git pull` and
+  fix conflicts.
+- If local config files have changed, just add and push them as usual.
+- If you want to add a new config file, do it with `git add` giving explicitly
+  the file path to override the included global `.gitignore` file.
 
 ## How it works
 
