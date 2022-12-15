@@ -8,7 +8,8 @@ set -e
 
 # Config
 BRANCH="main"
-# URL=https://github.com/piranna/dotfiles
+# TODO: get from environment variables, and ask if not provided
+# URL=https://github.com/piranna/dotfiles.git
 URL=git@github.com:piranna/dotfiles.git
 
 # Constants
@@ -30,13 +31,21 @@ cd $HOME
 git init --initial-branch=$BRANCH
 git remote add origin $URL
 
-# Commit conflicting files
-git add `$GIT_PULL 2>&1 | grep '^	'`
+# Get conflicting files
+stderr=`$GIT_PULL 2>&1`
+files=`echo "$stderr" | grep '^	'`
+
+# TODO: diferenciate between errors and no conflicting files
+[ -z "$files" ] && { >&2 echo $stderr ; exit 6; }
+
+# Commit conflicting local files
+git add $files
 cat /etc/hostname | git commit -F -
 
 # Merge the dotfiles repository
 while ! $GIT_PULL --no-rebase
 do
+  echo
   echo "Fix the conflicts in another shell and press enter to continue..."
   read REPLY  # POSIX shell requires at least one argument, also if not used
 done
@@ -44,7 +53,7 @@ done
 # Update the dotfiles repository
 git push origin $BRANCH
 
-# Remove repo non-needed files
+# Remove repo files not-needed in local
 rm -f $BLACKLIST
 git update-index --skip-worktree $BLACKLIST
 git gc --aggressive --prune=now
