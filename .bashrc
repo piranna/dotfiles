@@ -60,12 +60,14 @@ if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\n'
     PS1=$PS1'[\[\033[01;31m\]\u\[\033[00m\]@\[\033[34m\]\h\[\033[00m\]:\[\033[01;32m\]\w\[\033[00m\]]\n'
     PS1=$PS1'$(echo $?)'
-    PS1=$PS1'$(LANGUAGE=en_US git status 2> /dev/null | grep "nothing to commit" > /dev/null 2>&1;\
+    PS1=$PS1'$(
+        LANGUAGE=en_US git status 2> /dev/null | grep "nothing to commit" > /dev/null 2>&1;\
         if [ $? -ne 0 ]; then\
-            echo "\[\033[31m\]";$(__git_ps1)\[\033[00m\]\
-        elif [ $(git rev-parse --show-toplevel) != "$HOME" ]; then\
-            echo "\[\033[32m\]";$(__git_ps1)\[\033[00m\]\
-        fi)'
+            echo "\[\033[31m\]$(__git_ps1)\[\033[00m\]";\
+        elif [ `git rev-parse --show-toplevel` != "$HOME" ]; then\
+            echo "\[\033[32m\]$(__git_ps1)\[\033[00m\]";\
+        fi
+    )'
     PS1=$PS1' \[\033[33m\]>\[\033[00m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
