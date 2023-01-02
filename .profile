@@ -16,20 +16,21 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
+# set PATH so it includes user's private bins if they exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# source cargo environment script if it exists
 if [ -f "$HOME/.cargo/env" ] ; then
     . "$HOME/.cargo/env"
 fi
 
+# define locales
 export LANGUAGE="es:en"
 export LC_MESSAGES="es_ES.UTF-8"
 export LC_CTYPE="es_ES.UTF-8"
