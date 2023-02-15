@@ -7,10 +7,11 @@
 set -e
 
 # Config
-BRANCH="main"
-# TODO: get from environment variables, and ask if not provided
-# URL=https://github.com/piranna/dotfiles.git
-URL=git@github.com:piranna/dotfiles.git
+${URL_PATH:?missing URL_PATH environment variable}  # exit if not defined
+
+${BRANCH:="main"}
+${GITHUB_DOMAIN:="github.com"}
+${URL:=git@${GITHUB_DOMAIN}:${URL_PATH}.git}
 
 # Constants
 BLACKLIST="dotfiles.sh LICENSE README.md"
