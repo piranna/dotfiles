@@ -6,20 +6,21 @@
 
 set -e
 
-# Config
-${URL_PATH:?missing URL_PATH environment variable}  # exit if not defined
-
-${BRANCH:="main"}
-${GITHUB_DOMAIN:="github.com"}
-${URL:=git@${GITHUB_DOMAIN}:${URL_PATH}.git}
-
 # Constants
 BLACKLIST="dotfiles.sh LICENSE README.md"
-GIT_PULL="git pull origin $BRANCH --allow-unrelated-histories"
 
 
 install()
 {
+  # Config
+  ${URL_PATH:?}  # exit if URL_PATH environment variable not defined
+
+  ${BRANCH:="main"}
+  ${GITHUB_DOMAIN:="github.com"}
+  ${URL:=git@${GITHUB_DOMAIN}:${URL_PATH}.git}
+
+  GIT_PULL="git pull origin $BRANCH --allow-unrelated-histories"
+
   # Check if $HOME has already defined dotfiles, or could overwrite something
   [ -e ".git"        ] && { >&2 echo "Already is a git repository"   ; exit 3; }
   [ -e ".gitignore"  ] && { >&2 echo "Already has a .gitignore file" ; exit 4; }
