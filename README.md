@@ -24,15 +24,34 @@ specially if it will be a public one.
    ```sh
    URL_PATH=piranna/dotfiles
 
-   URL_PATH=$URL_PATH \
-     curl https://raw.github.com/${URL_PATH}/blob/main/dotfiles.sh \
-     | URL=<your-dotfiles-git-repo-url> sh
+   curl https://raw.github.com/${URL_PATH}/blob/main/dotfiles.sh | \
+     URL_PATH=$URL_PATH sh
    ```
 
 5. Fix any git conflict that's shown on the command line output on another
    terminal until there's no more conflict errors.
 6. Optionally, commit and push any other change you want to keep in your forked
    repository.
+
+### Environment variables
+
+Required:
+
+- `URL_PATH`: path fragment to the forked repository, for example
+  `piranna/dotfiles` for this one. It's used to download the install script and
+  to configure the remote repository.
+
+Optional:
+
+- `BRANCH`: branch to use in the forked repository. By default it's `main`, but
+  it can be overriden to use a different branch, for example `master`.
+- `GITHUB_DOMAIN`: domain of the Github instance to use. By default it's
+  `github.com`, but it can be overriden to use a different domain, for example a
+  self-hosted Github Enterprise instance.
+- `URL`: full URL to the forked repository. By default it's built from
+  `URL_PATH` and `GITHUB_DOMAIN` environment variables, but it can be overriden
+  to use a different domain, for example a self-hosted Github Enterprise
+  instance.
 
 ## How to update
 
@@ -43,6 +62,9 @@ Being powered by `git`, you can make use of all usual git workflows:
 - If local config files have changed, just add and push them as usual.
 - If you want to add a new config file, do it with `git add` giving explicitly
   the file path to override the included global `.gitignore` file.
+
+In case update process left some blacklisted files (specially `dotfiles.sh`),
+you can remove them manually by running `./dotfiles.sh remove_blacklisted`.
 
 ## How it works
 
