@@ -13,11 +13,9 @@ BLACKLIST="dotfiles.sh LICENSE README.md"
 install()
 {
   # Config
-  ${URL_PATH:?}  # exit if URL_PATH environment variable not defined
-
   ${BRANCH:="main"}
   ${GITHUB_DOMAIN:="github.com"}
-  ${URL:=git@${GITHUB_DOMAIN}:${URL_PATH}.git}
+  ${URL:=git@${GITHUB_DOMAIN}:${URL_PATH:?}.git}  # exit if URL_PATH environment variable not defined
 
   GIT_PULL="git pull origin $BRANCH --allow-unrelated-histories"
 
