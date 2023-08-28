@@ -24,7 +24,7 @@ specially if it will be a public one.
    ```sh
    URL_PATH=piranna/dotfiles
 
-   curl https://raw.github.com/${URL_PATH}/blob/main/dotfiles.sh | \
+   curl https://raw.githubusercontent.com/${URL_PATH}/main/dotfiles.sh | \
      URL_PATH=$URL_PATH sh
    ```
 
