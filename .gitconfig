@@ -1,0 +1,31 @@
+[alias]
+	co = checkout
+	tree = log --all --color --decorate --graph --oneline
+[color]
+	ui = auto
+[credential]
+	helper = store
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+[http]
+	cookiefile = /home/piranna/.gitcookies
+[includeIf "gitdir:~/Trabajo/Dyte/"]
+	path = ~/Trabajo/Dyte/gitconfig.ini
+[includeIf "gitdir:~/Trabajo/Atos/"]
+	path = ~/Trabajo/Atos/gitconfig.ini
+[merge]
+    tool = meld
+[mergetool "meld"]
+    # Choose one of these 2 lines (not both!) explained below.
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[user]
+	email = piranna@gmail.com
+	name = Jesús Leganés-Combarro 'piranna'
+
