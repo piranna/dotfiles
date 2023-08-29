@@ -41,7 +41,7 @@ install()
 
   # Commit conflicting local files
   git add $files
-  echo Initial commit: `cat /etc/hostname` | git commit -F -
+  echo Initial commit: `cat /etc/hostname` | git commit -F - || { rm -rf .git; exit 9; }
 
   # Merge the dotfiles repository
   while ! $GIT_PULL --no-rebase
