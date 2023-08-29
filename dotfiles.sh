@@ -12,6 +12,13 @@ BLACKLIST="dotfiles.sh LICENSE README.md"
 
 install()
 {
+  # Check if $HOME has already defined dotfiles, or could overwrite something
+  [ -e ".git"        ] && { >&2 echo "Already is a git repository"   ; exit 3; }
+  [ -e ".gitignore"  ] && { >&2 echo "Already has a .gitignore file" ; exit 4; }
+  [ -e "dotfiles.sh" ] && { >&2 echo "Already has a dotfiles.sh file"; exit 5; }
+  [ -e "LICENSE"     ] && { >&2 echo "Already has a LICENSE file"    ; exit 6; }
+  [ -e "README.md"   ] && { >&2 echo "Already has a README.md file"  ; exit 7; }
+
   # Config
   URL_PATH=${URL_PATH:?}  # exit if URL_PATH environment variable not defined
   
@@ -21,19 +28,12 @@ install()
 
   GIT_PULL="git pull origin $BRANCH --allow-unrelated-histories"
 
-  # Check if $HOME has already defined dotfiles, or could overwrite something
-  [ -e ".git"        ] && { >&2 echo "Already is a git repository"   ; exit 3; }
-  [ -e ".gitignore"  ] && { >&2 echo "Already has a .gitignore file" ; exit 4; }
-  [ -e "dotfiles.sh" ] && { >&2 echo "Already has a dotfiles.sh file"; exit 5; }
-  [ -e "LICENSE"     ] && { >&2 echo "Already has a LICENSE file"    ; exit 6; }
-  [ -e "README.md"   ] && { >&2 echo "Already has a README.md file"  ; exit 7; }
-
   # Create local repository
   git init --initial-branch=$BRANCH
   git remote add origin $URL
 
   # Get conflicting files
-  stderr=`$GIT_PULL 2>&1`
+  stderr=`$GIT_PULL 2>&1` || true
   files=`echo "$stderr" | grep '^	'`
 
   # TODO: diferenciate between errors and no conflicting files
@@ -70,15 +70,15 @@ remove_blacklisted()
 cd $HOME
 
 case $1 in
-	""|install)
-		install
+  ""|install)
+    install
     ;;
 
-	remove_blacklisted)
-		remove_blacklisted
-		;;
+  remove_blacklisted)
+    remove_blacklisted
+    ;;
 
-	*)
-		exit 64
-		;;
+  *)
+    exit 64
+    ;;
 esac
