@@ -35,3 +35,8 @@ export LANGUAGE="es:en"
 export LC_MESSAGES="es_ES.UTF-8"
 export LC_CTYPE="es_ES.UTF-8"
 export LC_COLLATE="es_ES.UTF-8"
+
+# linuxbrew
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ] ; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi

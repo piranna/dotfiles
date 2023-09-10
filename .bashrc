@@ -162,3 +162,10 @@ export PIPENV_VENV_IN_PROJECT=true
 if which npm; then
   eval "`npm completion`"
 fi
+
+# AWS
+export AWS_CONFIG_FILE=$HOME/.aws/config
+export AWS_PROFILE=shared_assets
+
+# Go
+export PATH=$PATH:$HOME/go/bin
