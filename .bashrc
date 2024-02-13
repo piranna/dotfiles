@@ -159,7 +159,7 @@ complete -C /usr/bin/terraform terraform
 export PIPENV_VENV_IN_PROJECT=true
 
 # npm completion
-if which npm; then
+if which npm > /dev/null; then
   eval "`npm completion`"
 fi
 
