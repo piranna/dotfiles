@@ -17,6 +17,8 @@
 	path = ~/Trabajo/Dyte/gitconfig.ini
 [includeIf "gitdir:~/Trabajo/Atos/"]
 	path = ~/Trabajo/Atos/gitconfig.ini
+[includeIf "gitdir:~/Trabajo/TRC/"]
+  path = ~/Trabajo/TRC/gitconfig.ini
 [merge]
     tool = meld
 [mergetool "meld"]
