@@ -155,8 +155,9 @@ export PATH=$PATH:$HOME/.local/bin
 
 complete -C /usr/bin/terraform terraform
 
-# PipEnv
+# PipEnv and Poetry
 export PIPENV_VENV_IN_PROJECT=true
+export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # npm completion
 if which npm > /dev/null; then
