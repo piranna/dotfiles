@@ -169,4 +169,6 @@ export AWS_CONFIG_FILE=$HOME/.aws/config
 export AWS_PROFILE=shared_assets
 
 # Go
-export PATH=$PATH:$HOME/go/bin
+if [ -d "$HOME/go/bin" ] ; then
+  export PATH=$PATH:$HOME/go/bin
+fi
